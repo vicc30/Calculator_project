@@ -1,88 +1,87 @@
 // class constructor for calculator adding numbers and operations
 
-class Calculator { 
-    constructor (previousText, currentText) {
+class Calculator {
+    constructor(previousText, currentText) {
         this.previousText = previousText;
         this.currentText = currentText;
         this.clear();
-        console.log("calculator class created");
-    }
-    
-    clear(){
-        this.currentText="";
-        this.previousText="";
-        this.operation=undefined;
     }
 
-    delete(){ //function that deletes one space
-        this.currentText = this.currentText.toString().slice(0,-1);
+    clear() {
+        this.currentText = "";
+        this.previousText = "";
+        this.operation = undefined;
     }
 
-    appendNumber(number){
-        if (number==="." && this.currentText.includes('.')) return ; //skips if it is selected more than 1 "."
-        if (this.currentText.length >=25) return; // max number of digits
-        this.currentText+=number.toString(); //appends number to currentText
+    delete() { //function that deletes one space
+        this.currentText = this.currentText.toString().slice(0, -1);
     }
 
-    chooseOperation(operation){
+    appendNumber(number) {
+        if (number === "." && this.currentText.includes('.')) return; //skips if it is selected more than 1 "."
+        if (this.currentText.length >= 25) return; // max number of digits
+        this.currentText += number.toString(); //appends number to currentText
+    }
+
+    chooseOperation(operation) {
         if (this.currentText === '') return;
-        if (this.currentText !==0 ){
+        if (this.currentText !== 0) {
             this.compute();
         }
-        this.operation=operation;
-        this.previousText=this.currentText;
-        this.currentText="";
+        this.operation = operation;
+        this.previousText = this.currentText;
+        this.currentText = "";
     }
 
-    compute(){ //choose operation to make the computation.
-        let computation 
+    compute() { //choose operation to make the computation.
+        let computation
         const prev = parseFloat(this.previousText);
         const current = parseFloat(this.currentText);
         if (isNaN(prev) || isNaN(current)) return;
-        switch(this.operation){
-            case '+': 
+        switch (this.operation) {
+            case '+':
                 computation = prev + current;
                 break;
-            case '-': 
+            case '-':
                 computation = prev - current;
                 break;
-            
-            case 'x': 
+
+            case 'x':
                 computation = prev * current;
                 break;
-            
-            case '÷': 
+
+            case '÷':
                 computation = prev / current;
                 break;
             default:
                 return;
         }
-        this.currentText=computation;
-        this.operation=undefined;
+        this.currentText = computation;
+        this.operation = undefined;
         this.previousText = '';
     }
 
-    updateDisplay(){
-    document.getElementById("current").innerHTML=this.currentText;
-    if (this.operation != null){
-    document.getElementById("previous").innerHTML=`${this.previousText} ${this.operation}`; 
-   } else {
-    document.getElementById("previous").innerHTML='';
-   }
+    updateDisplay() {
+        document.getElementById("current").innerHTML = this.currentText;
+        if (this.operation != null) {
+            document.getElementById("previous").innerHTML = `${this.previousText} ${this.operation}`;
+        } else {
+            document.getElementById("previous").innerHTML = '';
+        }
     }
 }
 
 // selectors declaration
 const numberButtons = document.querySelectorAll('[data-number]');
 const operationButtons = document.querySelectorAll('[data-operation]');
-const equalButton= document.querySelector('[data-equal]');
-const deleteButton= document.querySelector('[data-delete]');
+const equalButton = document.querySelector('[data-equal]');
+const deleteButton = document.querySelector('[data-delete]');
 const acButton = document.querySelector('[data-ac]');
 const previousText = document.querySelector('[data-previous]');
 const currentText = document.querySelector('[data-current]');
 
 //Creating new elements class
-const calculator = new Calculator (previousText,currentText);
+const calculator = new Calculator(previousText, currentText);
 
 //event listener for click numbers
 numberButtons.forEach(button => {
