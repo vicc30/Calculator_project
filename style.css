@@ -31,14 +31,14 @@ body {
 .calculator {
   background-color: #14a098;
   display: grid;
-  min-height: 100 vh;
   max-width: 340px;
   grid-template-columns: repeat(4, 80px);
   grid-template-rows: minmax(120px, auto) repeat(5, 50px);
   justify-content: center;
   align-items: center;
   border: solid 1px white;
-  margin: 15px;
+  margin: auto;
+  border-radius: 10px;
 }
 
 .calculator > button {
@@ -100,4 +100,9 @@ body {
 .display .current {
   font-size: 2rem;
   color: white;
+}
+
+ul li {
+  list-style-type: none;
+  font-size: 1rem;
 }

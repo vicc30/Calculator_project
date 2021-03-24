@@ -91,7 +91,6 @@ numberButtons.forEach(button => {
     });
 });
 
-
 //event listener for click operation buttons
 operationButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -117,3 +116,32 @@ deleteButton.addEventListener('click', button => {
     calculator.delete();
     calculator.updateDisplay();
 });
+
+// On keyboard press
+
+window.onkeyup = (e) => {
+    //Regex
+    const regExNum = /([\d.])+/;
+    const regExOp = /([\+\-*/])+/
+    const regExEqual = /(=)+/;
+
+    const key = e.key;
+    console.log(e.key);
+    //Cases number or operation or equal or delete
+    if (key.match(regExNum)) {
+        calculator.appendNumber(key);
+        calculator.updateDisplay();
+    } else if (key.match(regExOp)) {
+        calculator.chooseOperation(key);
+        calculator.updateDisplay();
+    } else if (key.match(regExEqual) || key === 'Enter') {
+        calculator.compute();
+        calculator.updateDisplay();
+    } else if (key === 'Backspace') {
+        calculator.delete();
+        calculator.updateDisplay();
+    } else if (key === 'Escape') {
+        calculator.clear();
+        calculator.updateDisplay();
+    }
+}
